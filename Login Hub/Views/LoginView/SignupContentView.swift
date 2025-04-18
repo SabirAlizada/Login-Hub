@@ -23,6 +23,8 @@ struct SignupContentView: View {
     }
     
     var body: some View {
+        let canSubmit = !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty && !password.isEmpty && !phoneNumber.isEmpty
+        
         VStack(spacing: 20) {
             HStack {
                 InputField(text: $firstName, placeholder: "First name")
@@ -56,19 +58,16 @@ struct SignupContentView: View {
                     .font(.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: 48)
-                    .background(Color.blue)
-                    .cornerRadius(10)
-                    .shadow(radius: 2)
+                    .background(canSubmit ? Color.blue : Color.gray)                    .cornerRadius(10)
             }
-            .frame(width: .infinity, height: 48)
+            .disabled(!canSubmit)
+            .opacity(canSubmit ? 1 : 0.5)
+            .frame(maxWidth: .infinity, minHeight: 48)
+            .shadow(radius: 2)
             .padding()
         }
         .padding()
     }
-}
-
-#Preview {
-    SignupContentView()
 }
 
 struct DatePickerField: View {

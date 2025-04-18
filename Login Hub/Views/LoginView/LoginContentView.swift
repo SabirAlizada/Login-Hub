@@ -12,8 +12,10 @@ struct LoginContentView: View {
     @State private var password = ""
     @State private var rememberMe = false
     @State private var showPassword = false
-    
+        
     var body: some View {
+        let canSubmit = !email.isEmpty && !password.isEmpty
+
         VStack(spacing: 30) {
             InputField(
                 text: $email,
@@ -45,20 +47,23 @@ struct LoginContentView: View {
                 Text("Log In")
                     .font(.headline)
                     .foregroundColor(.white)
+                    .padding()
                     .frame(maxWidth: .infinity, maxHeight: 48)
-                    .background(Color.blue)
+                    .background(canSubmit ? Color.blue : Color.gray)
                     .cornerRadius(10)
-                    .shadow(radius: 2)
             }
-            .frame(width: .infinity, height: 48)
+            .disabled(!canSubmit)
+            .opacity(canSubmit ? 1 : 0.5)
+            .frame(maxWidth: .infinity, maxHeight: 48)
+            .shadow(radius: 2)
             .padding()
             
             DividerWithLabel(label: "or log in with")
             
             HStack(spacing: 20) {
-                SocialButtonView(iconName: "") {}
-                SocialButtonView(iconName: "") {}
-                SocialButtonView(iconName: "") {}
+                SocialButtonView(iconName: "facebookLogo") {}
+                SocialButtonView(iconName: "googleLogo") {}
+                SocialButtonView(iconName: "appleLogo") {}
             }
             .padding(.vertical, 8)
             .padding(.bottom, 35)
@@ -86,6 +91,8 @@ struct InputField: View {
             )
             .background(Color(.secondarySystemBackground))
             .cornerRadius(10)
+            .frame(height: 44)
+            .shadow(radius: 0.7)
     }
 }
 
@@ -127,6 +134,8 @@ struct PasswordField: View {
                 }
             }
         }
+        .shadow(radius: 0.7)
+        
     }
 }
 
@@ -163,7 +172,7 @@ struct SocialButtonView: View {
     
     var body: some View {
         Button(action: action) {
-            Image(systemName: iconName)
+            Image(iconName)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 60, height: 60)

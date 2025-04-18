@@ -9,17 +9,17 @@ import SwiftUI
 
 struct LoginView: View {
     var body: some View {
-        ZStack {
-            LoginHeaderView()
+        ZStack(alignment: .top) {
             VStack {
+                LoginHeaderView()
                 Spacer()
-                AuthCardView()
             }
-            .ignoresSafeArea()
+            BottomSheet(content: AuthCardView())
+                .ignoresSafeArea()
         }
     }
 }
 
-#Preview(body: {
+#Preview {
     LoginView()
-})
+}
