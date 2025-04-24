@@ -29,9 +29,22 @@
 		03839C2D2D8FA75E004AC39A /* Login HubUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Login HubUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		03C079912DB48AE10069EA1F /* Exceptions for "Login Hub" folder in "Login HubTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Components/PasswordTextField.swift,
+			);
+			target = 03839C222D8FA75E004AC39A /* Login HubTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		03839C152D8FA75C004AC39A /* Login Hub */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				03C079912DB48AE10069EA1F /* Exceptions for "Login Hub" folder in "Login HubTests" target */,
+			);
 			path = "Login Hub";
 			sourceTree = "<group>";
 		};

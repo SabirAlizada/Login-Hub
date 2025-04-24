@@ -23,7 +23,11 @@ struct SignupContentView: View {
     }
     
     var body: some View {
-        let canSubmit = !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty && !password.isEmpty && !phoneNumber.isEmpty
+        let canSubmit = InputValidator.isValidName(firstName)
+        && InputValidator.isValidName(lastName)
+        && InputValidator.isValidEmail(email)
+        && InputValidator.isValidPassword(password)
+        && InputValidator.isValidPhoneNumber(phoneNumber)
         
         VStack(spacing: 20) {
             HStack {
@@ -38,7 +42,11 @@ struct SignupContentView: View {
                 textContentType: .emailAddress,
                 autocapitalization: .none)
             
-            PasswordField(password: $password, showPassword: $showPassword)
+            PasswordTextField(
+                password: $password,
+                showPassword: $showPassword,
+                placeholder: "Password (min 8 characters)"
+            )
             
             InputField(
                 text: $phoneNumber,
@@ -58,7 +66,8 @@ struct SignupContentView: View {
                     .font(.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: 48)
-                    .background(canSubmit ? Color.blue : Color.gray)                    .cornerRadius(10)
+                    .background(canSubmit ? Color.blue : Color.gray)
+                    .cornerRadius(10)
             }
             .disabled(!canSubmit)
             .opacity(canSubmit ? 1 : 0.5)

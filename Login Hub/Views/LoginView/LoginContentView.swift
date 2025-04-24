@@ -12,9 +12,17 @@ struct LoginContentView: View {
     @State private var password = ""
     @State private var rememberMe = false
     @State private var showPassword = false
+    
+    private var isValidEmail: Bool {
+        InputValidator.isValidEmail(email)
+    }
+    
+    private var isPasswordValid: Bool {
+        InputValidator.isValidPassword(password)
+    }
         
     var body: some View {
-        let canSubmit = !email.isEmpty && !password.isEmpty
+        let canSubmit = isValidEmail && !password.isEmpty
 
         VStack(spacing: 30) {
             InputField(
@@ -24,7 +32,11 @@ struct LoginContentView: View {
                 textContentType: .emailAddress,
                 autocapitalization: .none)
             
-            PasswordField(password: $password, showPassword: $showPassword)
+            PasswordTextField(
+                password: $password,
+                showPassword: $showPassword,
+                placeholder: "Password"
+            )
             
             HStack {
                 Toggle("Remember me", isOn: $rememberMe)
@@ -93,49 +105,6 @@ struct InputField: View {
             .cornerRadius(10)
             .frame(height: 44)
             .shadow(radius: 0.7)
-    }
-}
-
-struct PasswordField: View {
-    @Binding var password: String
-    @Binding var showPassword: Bool
-    
-    var body: some View {
-        ZStack {
-            if showPassword {
-                TextField("Password", text: $password)
-                    .textContentType(.password)
-                    .padding()
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.gray, lineWidth: 1)
-                    )
-                    .background(Color(.secondarySystemBackground))
-                    .cornerRadius(10)
-            } else {
-                SecureField("Password", text: $password)
-                    .textContentType(.password)
-                    .padding()
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.gray, lineWidth: 1)
-                    )
-                    .background(Color(.secondarySystemBackground))
-                    .cornerRadius(10)
-            }
-            HStack {
-                Spacer()
-                Button(action: { showPassword.toggle() }) {
-                    Image(
-                        systemName: showPassword ? "eye.slash.fill" : "eye.fill"
-                    )
-                    .foregroundColor(.gray)
-                    .padding(.trailing, 12)
-                }
-            }
-        }
-        .shadow(radius: 0.7)
-        
     }
 }
 
