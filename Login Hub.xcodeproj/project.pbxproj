@@ -33,7 +33,7 @@
 		03C079912DB48AE10069EA1F /* Exceptions for "Login Hub" folder in "Login HubTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Components/PasswordTextField.swift,
+				Components/CustomTextField.swift,
 			);
 			target = 03839C222D8FA75E004AC39A /* Login HubTests */;
 		};

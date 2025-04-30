@@ -17,6 +17,12 @@ struct SignupContentView: View {
     @State private var birthDate: Date = Date()
     @State private var studentID: String = ""
     
+    enum Field: Hashable {
+        case firstName, lastName, email, password, phone, studentId
+    }
+    
+    @FocusState private var focusedField: Field?
+    
     private var maxBirthDate: Date {
         // Subtract 16 years from the current date
         Calendar.current.date(byAdding: .year, value: -16, to: Date()) ?? Date()
@@ -24,15 +30,17 @@ struct SignupContentView: View {
     
     var body: some View {
         let canSubmit = InputValidator.isValidName(firstName)
-        && InputValidator.isValidName(lastName)
-        && InputValidator.isValidEmail(email)
-        && InputValidator.isValidPassword(password)
-        && InputValidator.isValidPhoneNumber(phoneNumber)
+            && InputValidator.isValidName(lastName)
+            && InputValidator.isValidEmail(email)
+            && InputValidator.isValidPassword(password)
+            && InputValidator.isValidPhoneNumber(phoneNumber)
         
         VStack(spacing: 20) {
             HStack {
                 InputField(text: $firstName, placeholder: "First name")
+                    .focused($focusedField, equals: .firstName)
                 InputField(text: $lastName, placeholder: "Last name")
+                    .focused($focusedField, equals: .lastName)
             }
             
             InputField(
@@ -41,24 +49,32 @@ struct SignupContentView: View {
                 keyboardType: .emailAddress,
                 textContentType: .emailAddress,
                 autocapitalization: .none)
+                .focused($focusedField, equals: .email)
             
             PasswordTextField(
                 password: $password,
                 showPassword: $showPassword,
-                placeholder: "Password (min 8 characters)"
+                placeholder: "Password (min 8 characters)",
+                onReturn: { focusedField = .phone }
             )
+            .focused($focusedField, equals: .password)
             
             InputField(
                 text: $phoneNumber,
                 placeholder: "Phone number",
                 keyboardType: .numberPad)
+                .focused($focusedField, equals: .phone)
             
             DatePickerField(
                 title: "Birth Date",
                 selection: $birthDate,
                 maximumDate: maxBirthDate)
             
-            InputField(text: $studentID, placeholder: "Student ID (if applicable)")
+            InputField(text: $studentID,
+                       placeholder: "Student ID (if applicable)",
+                       keyboardType: .phonePad,
+                       submitLabel: .return)
+                .focused($focusedField, equals: .studentId)
             
             Button {
             } label: {
@@ -73,9 +89,27 @@ struct SignupContentView: View {
             .opacity(canSubmit ? 1 : 0.5)
             .frame(maxWidth: .infinity, minHeight: 48)
             .shadow(radius: 2)
-            .padding()
         }
-        .padding()
+        .padding(.horizontal, 16)
+        .padding(.vertical, 20)
+        .onSubmit {
+            switch focusedField {
+            case .firstName:
+                focusedField = .lastName
+            case .lastName:
+                focusedField = .email
+            case .email:
+                focusedField = .password
+            case .password:
+                focusedField = .phone
+            case .phone:
+                focusedField = .studentId
+            case .studentId:
+                focusedField = nil
+            case .none:
+                break
+            }
+        }
     }
 }
 

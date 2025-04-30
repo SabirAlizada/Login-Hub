@@ -15,7 +15,6 @@ struct LoginView: View {
                 Spacer()
             }
             BottomSheet(content: AuthCardView())
-                .ignoresSafeArea()
         }
     }
 }

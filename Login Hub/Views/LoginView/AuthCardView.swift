@@ -24,7 +24,7 @@ struct AuthCardView: View {
             }
             .pickerStyle(.segmented)
             .frame(height: 44)
-            .scaleEffect(x: 1, y: 1.2, anchor: .center)
+            .scaleEffect(x: 1, y: 1, anchor: .center)
             .padding(.horizontal, 16)
             .padding(.top, 16)
             
@@ -76,7 +76,7 @@ struct BottomSheet<Content: View>: View {
             }
             .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { notification in
                 if let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-                    // Calculate keyboard height relative to safe area
+                    // Calculates keyboard height relative to safe area
                     let height = frame.height - geometry.safeAreaInsets.bottom
                     keyboardHeight = height > 0 ? height : 0
                 }
@@ -85,9 +85,7 @@ struct BottomSheet<Content: View>: View {
                 keyboardHeight = 0
             }
         }
-        .ignoresSafeArea(.keyboard, edges: .bottom)
+        .ignoresSafeArea(.all, edges: .bottom)
     }
 }
-
-
 

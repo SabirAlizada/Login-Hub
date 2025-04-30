@@ -9,7 +9,7 @@ import Foundation
 
 struct InputValidator {
     static func isValidName(_ name: String) -> Bool {
-        let nameRegex = "^[A-Za-zÀ-ÿ\\s'-]{2,}$"
+        let nameRegex = "^(?!.* {2})[A-Za-zÀ-ÿ\\s'-]{2,}$"
         let predicate = NSPredicate(format: "SELF MATCHES %@", nameRegex)
         return predicate.evaluate(with: name)
     }
@@ -21,12 +21,12 @@ struct InputValidator {
     }
     
     static func isValidEmail(_ email: String) -> Bool {
-        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let emailRegex = "^(?!.*\\s)[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
         let predicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         return predicate.evaluate(with: email)
     }
     
     static func isValidPassword(_ password: String) -> Bool {
-        return password.count >= 8
+        return password.count >= 8 && !password.contains(" ")
     }
 }

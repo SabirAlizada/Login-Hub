@@ -18,7 +18,7 @@ struct LoginHeaderView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 160, height: 80)
-                        .padding(.top, 10)
+                        .padding(.top, 20)
                     Spacer()
                 }
                 Text("Get started now")
@@ -35,7 +35,7 @@ struct LoginHeaderView: View {
                     .padding(.top, 12)
                 
                 Spacer()
-                
+                    
             }
             .padding(.leading, 24)
         }

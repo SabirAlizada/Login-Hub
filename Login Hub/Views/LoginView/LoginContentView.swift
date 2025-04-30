@@ -13,6 +13,12 @@ struct LoginContentView: View {
     @State private var rememberMe = false
     @State private var showPassword = false
     
+    enum Field {
+        case email, password
+    }
+    
+    @FocusState private var focusField: Field?
+    
     private var isValidEmail: Bool {
         InputValidator.isValidEmail(email)
     }
@@ -20,10 +26,10 @@ struct LoginContentView: View {
     private var isPasswordValid: Bool {
         InputValidator.isValidPassword(password)
     }
-        
+    
     var body: some View {
         let canSubmit = isValidEmail && !password.isEmpty
-
+        
         VStack(spacing: 30) {
             InputField(
                 text: $email,
@@ -31,12 +37,18 @@ struct LoginContentView: View {
                 keyboardType: .emailAddress,
                 textContentType: .emailAddress,
                 autocapitalization: .none)
+            .focused($focusField, equals: .email)
             
             PasswordTextField(
                 password: $password,
                 showPassword: $showPassword,
-                placeholder: "Password"
+                placeholder: "Password",
+                returnKeyType: .default
             )
+            .focused($focusField, equals: .password)
+            .onChange(of: showPassword) { oldValue, newValue in
+                focusField = .password
+            }
             
             HStack {
                 Toggle("Remember me", isOn: $rememberMe)
@@ -81,30 +93,6 @@ struct LoginContentView: View {
             .padding(.bottom, 35)
         }
         .padding(.horizontal, 16)
-    }
-}
-
-struct InputField: View {
-    @Binding var text: String
-    let placeholder: String
-    var keyboardType: UIKeyboardType = .default
-    var textContentType: UITextContentType? = nil
-    var autocapitalization: UITextAutocapitalizationType = .sentences
-    
-    var body: some View {
-        TextField(placeholder, text: $text)
-            .padding()
-            .keyboardType(keyboardType)
-            .textContentType(textContentType)
-            .autocapitalization(autocapitalization)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray, lineWidth: 1)
-            )
-            .background(Color(.secondarySystemBackground))
-            .cornerRadius(10)
-            .frame(height: 44)
-            .shadow(radius: 0.7)
     }
 }
 
