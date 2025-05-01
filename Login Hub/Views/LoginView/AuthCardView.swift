@@ -11,16 +11,18 @@ struct AuthCardView: View {
     
     @State private var selectedTab: AuthTab = .login
     
-    enum AuthTab {
-        case login
-        case signup
+    private enum AuthTab: String, CaseIterable, Identifiable {
+        case login = "Log in"
+        case signup = "Sign up"
+        var id: Self { self }
     }
     
     var body: some View {
         VStack(spacing: 20) {
-            Picker("", selection: $selectedTab) {
-                Text("Log in").tag(AuthTab.login)
-                Text("Sign up").tag(AuthTab.signup)
+            Picker(selection: $selectedTab, label: Text("")) {
+                ForEach(AuthTab.allCases) { tab in
+                    Text(tab.rawValue).tag(tab)
+                }
             }
             .pickerStyle(.segmented)
             .frame(height: 44)

@@ -17,7 +17,7 @@ struct SignupContentView: View {
     @State private var birthDate: Date = Date()
     @State private var studentID: String = ""
     
-    enum Field: Hashable {
+    private enum Field: Hashable {
         case firstName, lastName, email, password, phone, studentId
     }
     
@@ -30,13 +30,13 @@ struct SignupContentView: View {
     
     var body: some View {
         let canSubmit = InputValidator.isValidName(firstName)
-            && InputValidator.isValidName(lastName)
-            && InputValidator.isValidEmail(email)
-            && InputValidator.isValidPassword(password)
-            && InputValidator.isValidPhoneNumber(phoneNumber)
+        && InputValidator.isValidName(lastName)
+        && InputValidator.isValidEmail(email)
+        && InputValidator.isValidPassword(password)
+        && InputValidator.isValidPhoneNumber(phoneNumber)
         
         VStack(spacing: 20) {
-            HStack {
+            HStack(spacing: 20) {
                 InputField(text: $firstName, placeholder: "First name")
                     .focused($focusedField, equals: .firstName)
                 InputField(text: $lastName, placeholder: "Last name")
@@ -47,9 +47,9 @@ struct SignupContentView: View {
                 text: $email,
                 placeholder: "Email",
                 keyboardType: .emailAddress,
-                textContentType: .emailAddress,
-                autocapitalization: .none)
-                .focused($focusedField, equals: .email)
+                autocapitalization: .none
+            )
+            .focused($focusedField, equals: .email)
             
             PasswordTextField(
                 password: $password,
@@ -62,58 +62,58 @@ struct SignupContentView: View {
             InputField(
                 text: $phoneNumber,
                 placeholder: "Phone number",
-                keyboardType: .numberPad)
-                .focused($focusedField, equals: .phone)
+                keyboardType: .numberPad
+            )
+            .focused($focusedField, equals: .phone)
             
             DatePickerField(
                 title: "Birth Date",
                 selection: $birthDate,
-                maximumDate: maxBirthDate)
+                maximumDate: maxBirthDate
+            )
             
-            InputField(text: $studentID,
-                       placeholder: "Student ID (if applicable)",
-                       keyboardType: .phonePad,
-                       submitLabel: .return)
-                .focused($focusedField, equals: .studentId)
+            InputField(
+                text: $studentID,
+                placeholder: "Student ID (if applicable)",
+                keyboardType: .phonePad,
+                submitLabel: .return
+            )
+            .focused($focusedField, equals: .studentId)
             
             Button {
             } label: {
                 Text("Sign up")
                     .font(.headline)
                     .foregroundColor(.white)
-                    .frame(maxWidth: .infinity, maxHeight: 48)
+                    .frame(maxWidth: .infinity, minHeight: 48)
                     .background(canSubmit ? Color.blue : Color.gray)
                     .cornerRadius(10)
             }
             .disabled(!canSubmit)
             .opacity(canSubmit ? 1 : 0.5)
-            .frame(maxWidth: .infinity, minHeight: 48)
             .shadow(radius: 2)
         }
         .padding(.horizontal, 16)
-        .padding(.vertical, 20)
-        .onSubmit {
-            switch focusedField {
-            case .firstName:
-                focusedField = .lastName
-            case .lastName:
-                focusedField = .email
-            case .email:
-                focusedField = .password
-            case .password:
-                focusedField = .phone
-            case .phone:
-                focusedField = .studentId
-            case .studentId:
-                focusedField = nil
-            case .none:
-                break
-            }
+        .padding(.bottom, 20)
+        .onSubmit { advanceFocus() }
+    }
+    
+    // MARK: - Focus Management
+    /// Moves focus to the next field when the user submits
+    private func advanceFocus() {
+        switch focusedField {
+            case .firstName: focusedField = .lastName
+            case .lastName:  focusedField = .email
+            case .email:     focusedField = .password
+            case .password:  focusedField = .phone
+            case .phone:     focusedField = .studentId
+            case .studentId: focusedField = nil
+            case .none:      break
         }
     }
 }
 
-struct DatePickerField: View {
+private struct DatePickerField: View {
     var title: String
     @Binding var selection: Date
     var maximumDate: Date
@@ -129,5 +129,7 @@ struct DatePickerField: View {
         .padding()
         .overlay(
             RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+        .background(Color(.secondarySystemBackground))
+        
     }
 }

@@ -30,20 +30,23 @@ struct LoginContentView: View {
     var body: some View {
         let canSubmit = isValidEmail && !password.isEmpty
         
-        VStack(spacing: 30) {
+        VStack(spacing: 20) {
             InputField(
                 text: $email,
                 placeholder: "Email",
                 keyboardType: .emailAddress,
                 textContentType: .emailAddress,
-                autocapitalization: .none)
+                autocapitalization: .none,
+                submitLabel: .next
+            )
             .focused($focusField, equals: .email)
             
             PasswordTextField(
                 password: $password,
                 showPassword: $showPassword,
                 placeholder: "Password",
-                returnKeyType: .default
+                returnKeyType: .done,
+                onReturn: { focusField = nil }
             )
             .focused($focusField, equals: .password)
             .onChange(of: showPassword) { oldValue, newValue in
@@ -93,10 +96,20 @@ struct LoginContentView: View {
             .padding(.bottom, 35)
         }
         .padding(.horizontal, 16)
+        .onSubmit {
+            switch focusField {
+                case .email:
+                    focusField = .password
+                case .password:
+                    focusField = nil
+                case .none:
+                    break
+            }
+        }
     }
 }
 
-struct DividerWithLabel: View {
+private struct DividerWithLabel: View {
     var label: String
     var body: some View {
         HStack {
@@ -123,25 +136,28 @@ struct DividerWithLabel: View {
     }
 }
 
-struct SocialButtonView: View {
+private struct SocialButtonView: View {
     let iconName: String
     let action: () -> Void
     
     var body: some View {
         Button(action: action) {
-            Image(iconName)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 60, height: 60)
-                .background(Color(.systemGray6))  //TODO: change to white
-                .cornerRadius(22)
-                .shadow(
-                    color: .black.opacity(0.1), radius: CGFloat(2), x: 0, y: 3)
+            ZStack {
+                Color.white
+                    .cornerRadius(22)
+                    .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 3)
+
+                Image(iconName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 30, height: 30)
+            }
+            .frame(width: 60, height: 60)
         }
     }
 }
 
-struct CheckboxToggleStyle: ToggleStyle {
+private struct CheckboxToggleStyle: ToggleStyle {
     func makeBody(configuration: Configuration) -> some View {
         Button {
             configuration.isOn.toggle()

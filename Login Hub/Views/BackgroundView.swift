@@ -8,51 +8,67 @@
 import SwiftUI
 
 struct BackgroundView: View {
-    let starCount = 60
-    private let nightSkyColor = Color("nightSky")
-    private let cloudColor = Color("cloud")
-    
     @State private var starPositions: [CGPoint] = []
+    private static let starCount = 60
     
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                LinearGradient(
-                    gradient: Gradient(colors: [nightSkyColor, .cloud]),
-                    startPoint: .leading,
-                    endPoint: .trailing
-                )
-                .ignoresSafeArea()
-                
-                LinearGradient(
-                    gradient: Gradient(colors: [.gray.opacity(0.9), nightSkyColor]),
-                    startPoint: .trailing,
-                    endPoint: .leading
-                )
-                .blendMode(.lighten)
-                .blur(radius: 90)
-                .ignoresSafeArea()
-                
-                ForEach(0..<starCount, id: \.self) { index in
-                    Circle()
-                        .fill(Color.white.opacity(0.8))
-                        .frame(width: 2, height: 2)
-                        .position(
-                            x: starPositions[safe: index]?.x ?? 0,
-                            y: starPositions[safe: index]?.y ?? 0
-                        )
-                }
+                baseGradient
+                overlayGlare
+                starsView(in: geometry.size)
             }
-            .onAppear {
+            // Initializes stars once when the view appears
+            .task {
                 if starPositions.isEmpty {
-                    starPositions = (0..<starCount).map { _ in
-                        CGPoint(
-                            x: CGFloat.random(in: 0...geometry.size.width),
-                            y: CGFloat.random(in: 0...geometry.size.height)
-                        )
-                    }
+                    starPositions = generateStars(in: geometry.size)
                 }
             }
+        }
+    }
+    
+    // MARK: - Gradients
+    /// The base night sky gradient
+    private var baseGradient: some View {
+        LinearGradient(
+            gradient: Gradient(colors: [.nightSky, .cloud]),
+            startPoint: .leading,
+            endPoint: .trailing
+        )
+        .ignoresSafeArea()
+    }
+
+    /// Overlay glare effect for depth
+    private var overlayGlare: some View {
+        LinearGradient(
+            gradient: Gradient(colors: [.gray.opacity(0.9), .nightSky]),
+            startPoint: .trailing,
+            endPoint: .leading
+        )
+        .blendMode(.lighten)
+        .blur(radius: 90)
+        .ignoresSafeArea()
+    }
+
+    // MARK: - Stars Rendering
+    /// Renders the star circles at their positions
+    private func starsView(in size: CGSize) -> some View {
+        ForEach(0..<BackgroundView.starCount, id: \.self) { index in
+            Circle()
+                .fill(Color.white.opacity(0.8))
+                .frame(width: 2, height: 2)
+                .position(starPositions[safe: index] ?? .zero)
+        }
+    }
+
+    // MARK: - Stars Generation
+    /// Generates random star positions within the given size
+    private func generateStars(in size: CGSize) -> [CGPoint] {
+        (0..<BackgroundView.starCount).map { _ in
+            CGPoint(
+                x: CGFloat.random(in: 0...size.width),
+                y: CGFloat.random(in: 0...size.height)
+            )
         }
     }
 }

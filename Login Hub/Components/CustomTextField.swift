@@ -10,28 +10,50 @@ import UIKit
 import SwiftUI
 
 // A Wrapper that supports secure text entry toggling and binds its content to a SwiftUI view.
-struct PasswordFieldRepresentable: UIViewRepresentable {
-    @Binding var text: String
-    var isSecure: Bool
-    var placeholder: String
-    var returnKeyType: UIReturnKeyType = .next
-    var onReturn: (() -> Void)?
+struct PasswordTextFieldRepresentable: UIViewRepresentable {
+    @Binding private var text: String
+    private var isSecure: Bool
+    private var placeholder: String
+    private var returnKeyType: UIReturnKeyType
+    private var onReturn: (() -> Void)?
+    
+    init(
+        text: Binding<String>,
+        isSecure: Bool,
+        placeholder: String,
+        returnKeyType: UIReturnKeyType = .next,
+        onReturn: (() -> Void)? = nil
+    ) {
+        self._text = text
+        self.isSecure = isSecure
+        self.placeholder = placeholder
+        self.returnKeyType = returnKeyType
+        self.onReturn = onReturn
+    }
+    
     
     // MARK: - UIViewRepresentable
-    // Create and configure the UITextField instance
+    // Creates and configures the UITextField instance
     func makeUIView(context: Context) -> UITextField {
         let field = UITextField()
         field.delegate = context.coordinator
         field.isSecureTextEntry = isSecure
         field.placeholder = placeholder
-       // field.borderStyle = .roundedRect
         field.backgroundColor = .secondarySystemBackground
         field.enablesReturnKeyAutomatically = true
         field.returnKeyType = returnKeyType
+        field.autocorrectionType = .no
+        field.spellCheckingType = .no
+        field.autocapitalizationType = .none
+        field.smartDashesType = .no
+        field.smartQuotesType = .no
+        field.smartInsertDeleteType = .no
+        field.inputAssistantItem.leadingBarButtonGroups = []
+        field.inputAssistantItem.trailingBarButtonGroups = []
         return field
     }
     
-    // Update text and secure entry state when bindings change
+    // Updates text and secures entry state when bindings change
     func updateUIView(_ uiView: UITextField, context: Context) {
         uiView.text = text
         uiView.isSecureTextEntry = isSecure
@@ -72,23 +94,16 @@ struct PasswordTextField: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             ZStack {
-                PasswordFieldRepresentable(
+                PasswordTextFieldRepresentable(
                     text: $password,
                     isSecure: !showPassword,
                     placeholder: placeholder,
                     returnKeyType: returnKeyType,
                     onReturn: onReturn
                 )
-                .padding()
-                .background(Color(.secondarySystemBackground))
-                .cornerRadius(10)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.gray, lineWidth: 0.4)
-                )
-                .shadow(radius: 0.7)
-                .frame(height: 44)
-
+                .padding(.horizontal)
+                .modifier(FieldStyle())
+                
                 HStack {
                     Spacer()
                     Button(action: { showPassword.toggle() }) {
@@ -121,13 +136,21 @@ struct InputField: View {
             .onSubmit {
                 onSubmit?()
             }
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray, lineWidth: 1)
-            )
+            .modifier(FieldStyle())
+    }
+}
+
+//MARK: - FieldStyle ViewModifier for consistent field appearance
+private struct FieldStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .frame(height: 44)
             .background(Color(.secondarySystemBackground))
             .cornerRadius(10)
-            .frame(height: 44)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.gray, lineWidth: 0.3)
+            )
             .shadow(radius: 0.7)
     }
 }
