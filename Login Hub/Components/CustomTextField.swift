@@ -10,30 +10,15 @@ import UIKit
 import SwiftUI
 
 // A Wrapper that supports secure text entry toggling and binds its content to a SwiftUI view.
-struct PasswordTextFieldRepresentable: UIViewRepresentable {
-    @Binding private var text: String
-    private var isSecure: Bool
-    private var placeholder: String
-    private var returnKeyType: UIReturnKeyType
-    private var onReturn: (() -> Void)?
-    
-    init(
-        text: Binding<String>,
-        isSecure: Bool,
-        placeholder: String,
-        returnKeyType: UIReturnKeyType = .next,
-        onReturn: (() -> Void)? = nil
-    ) {
-        self._text = text
-        self.isSecure = isSecure
-        self.placeholder = placeholder
-        self.returnKeyType = returnKeyType
-        self.onReturn = onReturn
-    }
-    
+struct PasswordFieldRepresentable: UIViewRepresentable {
+    @Binding var text: String
+    var isSecure: Bool
+    var placeholder: String
+    var returnKeyType: UIReturnKeyType = .next
+    var onReturn: (() -> Void)?
     
     // MARK: - UIViewRepresentable
-    // Creates and configures the UITextField instance
+    // Create and configure the UITextField instance
     func makeUIView(context: Context) -> UITextField {
         let field = UITextField()
         field.delegate = context.coordinator
@@ -42,21 +27,27 @@ struct PasswordTextFieldRepresentable: UIViewRepresentable {
         field.backgroundColor = .secondarySystemBackground
         field.enablesReturnKeyAutomatically = true
         field.returnKeyType = returnKeyType
+        field.textContentType = .none // Disable password autofill
         field.autocorrectionType = .no
-        field.spellCheckingType = .no
-        field.autocapitalizationType = .none
-        field.smartDashesType = .no
-        field.smartQuotesType = .no
-        field.smartInsertDeleteType = .no
-        field.inputAssistantItem.leadingBarButtonGroups = []
-        field.inputAssistantItem.trailingBarButtonGroups = []
         return field
     }
     
-    // Updates text and secures entry state when bindings change
+    // Update text and secure entry state when bindings change
     func updateUIView(_ uiView: UITextField, context: Context) {
-        uiView.text = text
-        uiView.isSecureTextEntry = isSecure
+        // Only update text if it's different to avoid cursor reset
+        if uiView.text != text {
+            uiView.text = text
+        }
+        
+        // Handle secure text entry change
+        if uiView.isSecureTextEntry != isSecure {
+            // Create a temporary field to avoid cursor jumping
+            let tempField = UITextField()
+            tempField.isSecureTextEntry = isSecure
+            tempField.text = text
+            uiView.text = tempField.text
+            uiView.isSecureTextEntry = isSecure
+        }
     }
     
     func makeCoordinator() -> Coordinator {
@@ -73,7 +64,9 @@ struct PasswordTextFieldRepresentable: UIViewRepresentable {
         }
         
         func textFieldDidChangeSelection(_ textField: UITextField) {
-            text.wrappedValue = textField.text ?? ""
+            DispatchQueue.main.async {
+                self.text.wrappedValue = textField.text ?? ""
+            }
         }
         
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -94,16 +87,23 @@ struct PasswordTextField: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             ZStack {
-                PasswordTextFieldRepresentable(
+                PasswordFieldRepresentable(
                     text: $password,
                     isSecure: !showPassword,
                     placeholder: placeholder,
                     returnKeyType: returnKeyType,
                     onReturn: onReturn
                 )
-                .padding(.horizontal)
-                .modifier(FieldStyle())
-                
+                .padding()
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gray, lineWidth: 0.4)
+                )
+                .shadow(radius: 0.7)
+                .frame(height: 44)
+
                 HStack {
                     Spacer()
                     Button(action: { showPassword.toggle() }) {
@@ -136,21 +136,13 @@ struct InputField: View {
             .onSubmit {
                 onSubmit?()
             }
-            .modifier(FieldStyle())
-    }
-}
-
-//MARK: - FieldStyle ViewModifier for consistent field appearance
-private struct FieldStyle: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .frame(height: 44)
-            .background(Color(.secondarySystemBackground))
-            .cornerRadius(10)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray, lineWidth: 0.3)
+                    .stroke(Color.gray, lineWidth: 1)
             )
+            .background(Color(.secondarySystemBackground))
+            .cornerRadius(10)
+            .frame(height: 44)
             .shadow(radius: 0.7)
     }
 }

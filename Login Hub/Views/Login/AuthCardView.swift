@@ -10,6 +10,7 @@ import SwiftUI
 struct AuthCardView: View {
     
     @State private var selectedTab: AuthTab = .login
+    let viewModel: SocialLoginViewModel
     
     private enum AuthTab: String, CaseIterable, Identifiable {
         case login = "Log in"
@@ -33,10 +34,10 @@ struct AuthCardView: View {
             // Switch content based on selected tab
             Group {
                 if selectedTab == .login {
-                    LoginContentView()
+                    LoginContentView(viewModel: viewModel)
                         .transition(.move(edge: .leading))
                 } else {
-                    SignupContentView()
+                    SignupContentView(viewModel: viewModel)
                         .transition(.move(edge: .trailing))
                 }
             }

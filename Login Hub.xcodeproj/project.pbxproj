@@ -6,6 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		035F70BF2DC47433001CCEC5 /* FacebookBasics in Frameworks */ = {isa = PBXBuildFile; productRef = 035F70BE2DC47433001CCEC5 /* FacebookBasics */; };
+		035F70C12DC47433001CCEC5 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 035F70C02DC47433001CCEC5 /* FacebookCore */; };
+		035F70C32DC47433001CCEC5 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 035F70C22DC47433001CCEC5 /* FacebookLogin */; };
+		035F70C52DC47636001CCEC5 /* FacebookAEM in Frameworks */ = {isa = PBXBuildFile; productRef = 035F70C42DC47636001CCEC5 /* FacebookAEM */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		03839C242D8FA75E004AC39A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -30,10 +37,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		035F72AE2DC5284D001CCEC5 /* Exceptions for "Login Hub" folder in "Login Hub" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Login-Hub-Info.plist",
+			);
+			target = 03839C122D8FA75C004AC39A /* Login Hub */;
+		};
 		03C079912DB48AE10069EA1F /* Exceptions for "Login Hub" folder in "Login HubTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Components/CustomTextField.swift,
+				Services/FacebookLoginProvider.swift,
+				Services/SocialLoginProvider.swift,
+				ViewModels/SocialLoginViewModel.swift,
 			);
 			target = 03839C222D8FA75E004AC39A /* Login HubTests */;
 		};
@@ -43,6 +60,7 @@
 		03839C152D8FA75C004AC39A /* Login Hub */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				035F72AE2DC5284D001CCEC5 /* Exceptions for "Login Hub" folder in "Login Hub" target */,
 				03C079912DB48AE10069EA1F /* Exceptions for "Login Hub" folder in "Login HubTests" target */,
 			);
 			path = "Login Hub";
@@ -65,6 +83,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				035F70C52DC47636001CCEC5 /* FacebookAEM in Frameworks */,
+				035F70BF2DC47433001CCEC5 /* FacebookBasics in Frameworks */,
+				035F70C12DC47433001CCEC5 /* FacebookCore in Frameworks */,
+				035F70C32DC47433001CCEC5 /* FacebookLogin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +147,10 @@
 			);
 			name = "Login Hub";
 			packageProductDependencies = (
+				035F70BE2DC47433001CCEC5 /* FacebookBasics */,
+				035F70C02DC47433001CCEC5 /* FacebookCore */,
+				035F70C22DC47433001CCEC5 /* FacebookLogin */,
+				035F70C42DC47636001CCEC5 /* FacebookAEM */,
 			);
 			productName = "Login Hub";
 			productReference = 03839C132D8FA75C004AC39A /* Login Hub.app */;
@@ -208,6 +234,9 @@
 			);
 			mainGroup = 03839C0A2D8FA75C004AC39A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				035F70BD2DC47408001CCEC5 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 03839C142D8FA75C004AC39A /* Products */;
 			projectDirPath = "";
@@ -335,6 +364,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -393,6 +423,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -413,6 +444,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Login Hub/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Login-Hub-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -425,6 +457,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sabir.Login-Hub";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -441,6 +477,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Login Hub/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Login-Hub-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -453,6 +490,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sabir.Login-Hub";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -567,6 +608,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		035F70BD2DC47408001CCEC5 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		035F70BE2DC47433001CCEC5 /* FacebookBasics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 035F70BD2DC47408001CCEC5 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookBasics;
+		};
+		035F70C02DC47433001CCEC5 /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 035F70BD2DC47408001CCEC5 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		035F70C22DC47433001CCEC5 /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 035F70BD2DC47408001CCEC5 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+		035F70C42DC47636001CCEC5 /* FacebookAEM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 035F70BD2DC47408001CCEC5 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookAEM;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 03839C0B2D8FA75C004AC39A /* Project object */;
 }

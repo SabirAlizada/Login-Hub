@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct LoginView: View {
+    let viewModel: SocialLoginViewModel
+    
     var body: some View {
-        ZStack(alignment: .top) {
-            VStack {
-                LoginHeaderView()
-                Spacer()
+        NavigationStack {
+            
+            ZStack(alignment: .top) {
+                VStack {
+                    LoginHeaderView()
+                    Spacer()
+                }
+                BottomSheet(content: AuthCardView(viewModel: viewModel))
             }
-            BottomSheet(content: AuthCardView())
         }
     }
-}
-
-#Preview {
-    LoginView()
 }
