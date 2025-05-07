@@ -25,10 +25,16 @@ struct PasswordFieldRepresentable: UIViewRepresentable {
         field.isSecureTextEntry = isSecure
         field.placeholder = placeholder
         field.backgroundColor = .secondarySystemBackground
+        field.spellCheckingType = .no
+        field.smartDashesType = .no
+        field.smartQuotesType = .no
         field.enablesReturnKeyAutomatically = true
         field.returnKeyType = returnKeyType
-        field.textContentType = .none // Disable password autofill
+        field.textContentType = .none
         field.autocorrectionType = .no
+        field.inputAssistantItem.leadingBarButtonGroups.removeAll()
+        field.inputAssistantItem.trailingBarButtonGroups.removeAll()
+        field.inputAccessoryView = nil
         return field
     }
     
@@ -103,7 +109,7 @@ struct PasswordTextField: View {
                 )
                 .shadow(radius: 0.7)
                 .frame(height: 44)
-
+                
                 HStack {
                     Spacer()
                     Button(action: { showPassword.toggle() }) {

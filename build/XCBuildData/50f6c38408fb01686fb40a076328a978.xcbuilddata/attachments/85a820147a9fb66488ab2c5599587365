@@ -1,0 +1,15 @@
+{
+  "" : {
+    "const-values" : "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/build/Facebook.build/Release-iphoneos/FacebookAEM.build/Objects-normal/arm64/FacebookAEM-master.swiftconstvalues",
+    "dependencies" : "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/build/Facebook.build/Release-iphoneos/FacebookAEM.build/Objects-normal/arm64/FacebookAEM-master.d",
+    "diagnostics" : "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/build/Facebook.build/Release-iphoneos/FacebookAEM.build/Objects-normal/arm64/FacebookAEM-master.dia",
+    "emit-module-dependencies" : "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/build/Facebook.build/Release-iphoneos/FacebookAEM.build/Objects-normal/arm64/FacebookAEM-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/build/Facebook.build/Release-iphoneos/FacebookAEM.build/Objects-normal/arm64/FacebookAEM-master-emit-module.dia",
+    "swift-dependencies" : "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/build/Facebook.build/Release-iphoneos/FacebookAEM.build/Objects-normal/arm64/FacebookAEM-master.swiftdeps"
+  },
+  "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/Sources/FacebookAEM/Exports.swift" : {
+    "index-unit-output-path" : "/Facebook.build/Release-iphoneos/FacebookAEM.build/Objects-normal/arm64/Exports.o",
+    "llvm-bc" : "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/build/Facebook.build/Release-iphoneos/FacebookAEM.build/Objects-normal/arm64/Exports.bc",
+    "object" : "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/build/Facebook.build/Release-iphoneos/FacebookAEM.build/Objects-normal/arm64/Exports.o"
+  }
+}

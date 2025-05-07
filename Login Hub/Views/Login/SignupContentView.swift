@@ -31,12 +31,12 @@ struct SignupContentView: View {
     
     var body: some View {
         let canSubmit = InputValidator.isValidName(firstName)
-            && InputValidator.isValidName(lastName)
-            && InputValidator.isValidEmail(email)
-            && InputValidator.isValidPassword(password)
-            && InputValidator.isValidPhoneNumber(phoneNumber)
+        && InputValidator.isValidName(lastName)
+        && InputValidator.isValidEmail(email)
+        && InputValidator.isValidPassword(password)
+        && InputValidator.isValidPhoneNumber(phoneNumber)
         
-        VStack(spacing: 20) {
+        VStack(spacing: 30) {
             HStack(spacing: 20) {
                 InputField(text: $firstName, placeholder: "First name")
                     .focused($focusedField, equals: .firstName)
@@ -49,7 +49,7 @@ struct SignupContentView: View {
                 placeholder: "Email",
                 keyboardType: .emailAddress,
                 autocapitalization: .none)
-                .focused($focusedField, equals: .email)
+            .focused($focusedField, equals: .email)
             
             PasswordTextField(
                 password: $password,
@@ -63,7 +63,7 @@ struct SignupContentView: View {
                 text: $phoneNumber,
                 placeholder: "Phone number",
                 keyboardType: .numberPad)
-                .focused($focusedField, equals: .phone)
+            .focused($focusedField, equals: .phone)
             
             DatePickerField(
                 title: "Birth Date",
@@ -74,7 +74,7 @@ struct SignupContentView: View {
                        placeholder: "Student ID (if applicable)",
                        keyboardType: .phonePad,
                        submitLabel: .return)
-                .focused($focusedField, equals: .studentId)
+            .focused($focusedField, equals: .studentId)
             
             Button {
             } label: {
@@ -89,24 +89,25 @@ struct SignupContentView: View {
             .opacity(canSubmit ? 1 : 0.5)
             .frame(maxWidth: .infinity, minHeight: 48)
             .shadow(radius: 2)
+            .padding(.bottom, 20)
         }
         .padding(.horizontal, 16)
         .onSubmit {
             switch focusedField {
-            case .firstName:
-                focusedField = .lastName
-            case .lastName:
-                focusedField = .email
-            case .email:
-                focusedField = .password
-            case .password:
-                focusedField = .phone
-            case .phone:
-                focusedField = .studentId
-            case .studentId:
-                focusedField = nil
-            case .none:
-                break
+                case .firstName:
+                    focusedField = .lastName
+                case .lastName:
+                    focusedField = .email
+                case .email:
+                    focusedField = .password
+                case .password:
+                    focusedField = .phone
+                case .phone:
+                    focusedField = .studentId
+                case .studentId:
+                    focusedField = nil
+                case .none:
+                    break
             }
         }
     }

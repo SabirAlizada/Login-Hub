@@ -9,7 +9,6 @@ import SwiftUI
 
 struct LoginContentView: View {
     @StateObject var viewModel: SocialLoginViewModel
-
     @State private var email = ""
     @State private var password = ""
     @State private var rememberMe = false
@@ -23,17 +22,16 @@ struct LoginContentView: View {
         case email, password
     }
     
-   private enum LoginNavigation: Hashable {
+    private enum LoginNavigation: Hashable {
         case dashboard
     }
-        
+    
     private var canSubmit: Bool {
-         InputValidator.isValidEmail(email) && !password.isEmpty
-     }
+        InputValidator.isValidEmail(email) && !password.isEmpty
+    }
     
     var body: some View {
         NavigationStack(path: $path) {
-            
             VStack(spacing: 30) {
                 InputField(
                     text: $email,
@@ -113,7 +111,6 @@ struct LoginContentView: View {
             }
             .onChange(of: viewModel.userProfile) { _, profile in
                 if profile != nil {
-                    //  navigateToDashboard = true
                     path.append(LoginNavigation.dashboard)
                 }
             }
@@ -136,7 +133,6 @@ struct DividerWithLabel: View {
         HStack {
             Rectangle()
                 .frame(height: 1)
-                .foregroundColor(.secondary)
                 .foregroundStyle(.gray)
                 .opacity(0.3)
             
@@ -163,14 +159,17 @@ struct SocialButtonView: View {
     
     var body: some View {
         Button(action: action) {
-            Image(iconName)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 60, height: 60)
-                .background(Color(.systemGray6))  //TODO: change to white
-                .cornerRadius(22)
-                .shadow(
-                    color: .black.opacity(0.1), radius: CGFloat(2), x: 0, y: 3)
+            ZStack {
+                Color.white
+                    .cornerRadius(22)
+                    .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 3)
+                
+                Image(iconName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 30, height: 30)
+            }
+            .frame(width: 60, height: 60)
         }
     }
 }

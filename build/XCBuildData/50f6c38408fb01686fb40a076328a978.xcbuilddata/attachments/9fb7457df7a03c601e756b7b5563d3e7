@@ -1,0 +1,20 @@
+{
+  "" : {
+    "const-values" : "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/build/Facebook.build/Release-iphoneos/FacebookCore.build/Objects-normal/arm64/FacebookCore-master.swiftconstvalues",
+    "dependencies" : "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/build/Facebook.build/Release-iphoneos/FacebookCore.build/Objects-normal/arm64/FacebookCore-master.d",
+    "diagnostics" : "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/build/Facebook.build/Release-iphoneos/FacebookCore.build/Objects-normal/arm64/FacebookCore-master.dia",
+    "emit-module-dependencies" : "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/build/Facebook.build/Release-iphoneos/FacebookCore.build/Objects-normal/arm64/FacebookCore-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/build/Facebook.build/Release-iphoneos/FacebookCore.build/Objects-normal/arm64/FacebookCore-master-emit-module.dia",
+    "swift-dependencies" : "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/build/Facebook.build/Release-iphoneos/FacebookCore.build/Objects-normal/arm64/FacebookCore-master.swiftdeps"
+  },
+  "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/Sources/FacebookCore/Exports.swift" : {
+    "index-unit-output-path" : "/Facebook.build/Release-iphoneos/FacebookCore.build/Objects-normal/arm64/Exports.o",
+    "llvm-bc" : "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/build/Facebook.build/Release-iphoneos/FacebookCore.build/Objects-normal/arm64/Exports.bc",
+    "object" : "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/build/Facebook.build/Release-iphoneos/FacebookCore.build/Objects-normal/arm64/Exports.o"
+  },
+  "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/Sources/FacebookCore/Imports.swift" : {
+    "index-unit-output-path" : "/Facebook.build/Release-iphoneos/FacebookCore.build/Objects-normal/arm64/Imports.o",
+    "llvm-bc" : "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/build/Facebook.build/Release-iphoneos/FacebookCore.build/Objects-normal/arm64/Imports.bc",
+    "object" : "/Users/sabir/Library/Developer/Xcode/DerivedData/Login_Hub-awuchgbuckmxcbfhsjimkiysoxkp/SourcePackages/checkouts/facebook-ios-sdk/build/Facebook.build/Release-iphoneos/FacebookCore.build/Objects-normal/arm64/Imports.o"
+  }
+}

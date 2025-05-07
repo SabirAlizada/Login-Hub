@@ -1,0 +1,24 @@
+version: "Apple Swift version 6.1 (swiftlang-6.1.0.110.21 clang-1700.0.13.3)"
+options: "e5813acc5a0a4ae9f49f72efb42a9bb19125a9bee62385eec0f0ea540206fa26"
+build_start_time: [1746498378, 91630000]
+build_end_time: [1746498424, 611914000]
+inputs:
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/App/ContentView.swift": !dirty [1746241086, 136153386]
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/App/Login_HubApp.swift": !dirty [1746471819, 418335423]
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Components/CustomTextField.swift": !dirty [1746498287, 973642281]
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Models/SocialUserProfile.swift": !dirty [1746460498, 584811238]
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Services/FacebookLoginAppDelegate.swift": !dirty [1746202288, 14006268]
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Services/FacebookLoginProvider.swift": !dirty [1746411334, 56921513]
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Services/SocialLoginProvider.swift": !dirty [1746411334, 67447199]
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Utilities/InputValidator.swift": !dirty [1746114389, 346430189]
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Utilities/KeyboardAdaptive.swift": !dirty [1746496097, 249834516]
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/ViewModels/SocialLoginViewModel.swift": !dirty [1746411334, 36128062]
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Views/BackgroundView.swift": !dirty [1746134412, 165927051]
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Views/Dashboard/DashboardView.swift": !dirty [1746238808, 335602392]
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Views/Login/AuthCardView.swift": !dirty [1746497966, 844226516]
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Views/Login/LoginContentView.swift": !dirty [1746498247, 171840017]
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Views/Login/LoginHeaderView.swift": !dirty [1746117816, 439964702]
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Views/Login/SignupContentView.swift": !dirty [1746498237, 343803148]
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Views/LoginView.swift": !dirty [1746497978, 121943504]
+  ? "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/DerivedSources/GeneratedAssetSymbols.swift"
+  : !dirty [1746498377, 554092830]
