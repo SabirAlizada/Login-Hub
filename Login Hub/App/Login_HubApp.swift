@@ -7,28 +7,32 @@
 
 import SwiftUI
 import FacebookLogin
+import FirebaseCore
+import GoogleSignIn
 
 @main
 struct Login_HubApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
+    init() {
+        // Initializes Firebase
+        FirebaseApp.configure()
+        
+        // Configures Google Sign-In
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: clientID)
+    }
+    
     @StateObject private var viewModel = SocialLoginViewModel(
         providers: [
-            .facebook: FacebookLoginProvider()
+            .facebook: FacebookLoginProvider(),
+            .google: GoogleLoginProvider()
         ]
     )
     
     var body: some Scene {
         WindowGroup {
             ContentView(viewModel: viewModel)
-                .onOpenURL { url in
-                    ApplicationDelegate.shared.application(
-                        UIApplication.shared,
-                        open: url,
-                        sourceApplication: nil,
-                        annotation: UIApplication.OpenURLOptionsKey.annotation
-                    )
-                }
         }
     }
 }

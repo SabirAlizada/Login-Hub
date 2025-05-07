@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import GoogleSignIn
+import FirebaseAuth
 
 struct LoginContentView: View {
     @StateObject var viewModel: SocialLoginViewModel
@@ -92,7 +94,9 @@ struct LoginContentView: View {
                     SocialButtonView(iconName: "facebookLogo") {
                         viewModel.login(with: .facebook)
                     }
-                    SocialButtonView(iconName: "googleLogo") {}
+                    SocialButtonView(iconName: "googleLogo") {
+                        viewModel.login(with: .google)
+                    }
                     SocialButtonView(iconName: "appleLogo") {}
                 }
                 .padding(.vertical, 8)
@@ -191,3 +195,4 @@ struct CheckboxToggleStyle: ToggleStyle {
         .buttonStyle(PlainButtonStyle())
     }
 }
+
