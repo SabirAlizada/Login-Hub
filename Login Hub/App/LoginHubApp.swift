@@ -11,7 +11,7 @@ import FirebaseCore
 import GoogleSignIn
 
 @main
-struct Login_HubApp: App {
+struct LoginHubApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     init() {
@@ -26,7 +26,8 @@ struct Login_HubApp: App {
     @StateObject private var viewModel = SocialLoginViewModel(
         providers: [
             .facebook: FacebookLoginProvider(),
-            .google: GoogleLoginProvider()
+            .google: GoogleLoginProvider(),
+            .apple: AppleLoginProvider()
         ]
     )
     

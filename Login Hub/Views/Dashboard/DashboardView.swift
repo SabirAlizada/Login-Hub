@@ -10,28 +10,62 @@ import SwiftUI
 struct DashboardView: View {
     let userProfile: SocialUserProfile
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var viewModel: SocialLoginViewModel
     
     var body: some View {
-        VStack {
-            if let url = URL(string: userProfile.avatarURL ?? "") {
-                AsyncImage(url: url) { image in
-                    image.resizable()
-                } placeholder: {
-                    ProgressView()
+        VStack(spacing: 20) {
+            // Profile Image
+            Group {
+                if let url = URL(string: userProfile.avatarURL ?? "") {
+                    AsyncImage(url: url) { image in
+                        image.resizable()
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .frame(width: 100, height: 100)
+                    .clipShape(Circle())
+                } else {
+                    // Default profile image for Apple Sign In
+                    Image(systemName: "person.circle.fill")
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                        .foregroundColor(.gray)
                 }
-                .frame(width: 100, height: 100)
-                .clipShape(Circle())
             }
-            Text(userProfile.name)
-            Text(userProfile.email)
-            // Add your university app components here
             
-            Button("Log Out") {
-                // Handle logout logic
-                presentationMode.wrappedValue.dismiss()
+            // User Info
+            VStack(spacing: 8) {
+                Text(userProfile.name)
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                
+                Text(userProfile.email)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                
+                Text("Signed in with \(userProfile.provider.rawValue.capitalized)")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                    .padding(.top, 4)
             }
-            .foregroundColor(.red)
+            
+            Spacer()
+            
+            // Logout Button
+            Button(action: {
+                viewModel.logout()
+                presentationMode.wrappedValue.dismiss()
+            }) {
+                Text("Log Out")
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.red)
+                    .cornerRadius(10)
+            }
+            .padding(.horizontal)
         }
         .padding()
+        .navigationBarBackButtonHidden(true)
     }
 }

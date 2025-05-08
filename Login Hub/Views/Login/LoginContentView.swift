@@ -97,7 +97,9 @@ struct LoginContentView: View {
                     SocialButtonView(iconName: "googleLogo") {
                         viewModel.login(with: .google)
                     }
-                    SocialButtonView(iconName: "appleLogo") {}
+                    SocialButtonView(iconName: "appleLogo") {
+                        viewModel.login(with: .apple)
+                    }
                 }
                 .padding(.vertical, 8)
                 .padding(.bottom, 35)
