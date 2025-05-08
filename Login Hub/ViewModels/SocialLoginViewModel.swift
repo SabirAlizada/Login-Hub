@@ -1,5 +1,5 @@
 //
-//  SocialUserViewModel.swift
+//  SocialLoginViewModel.swift
 //  Login Hub
 //
 //  Created by Sabir Alizada on 02.05.25.
@@ -15,10 +15,10 @@ final class SocialLoginViewModel: ObservableObject {
     @Published var isLoggedIn: Bool = false
 
     private var cancellables = Set<AnyCancellable>()
-    private let providers: [SocialProvider: SocialLoginProvider]
+    private let providers: [SocialProvider: SocialLoginProviderProtocol]
 
     // Initializes the ViewModel with a dictionary of providers.
-    init(providers: [SocialProvider: SocialLoginProvider]) {
+    init(providers: [SocialProvider: SocialLoginProviderProtocol]) {
         self.providers = providers
         setupBindings()
     }

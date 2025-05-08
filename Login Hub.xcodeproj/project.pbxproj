@@ -78,7 +78,7 @@
 				Components/CustomTextField.swift,
 				"GoogleService-Info.plist",
 				Models/SocialUserProfile.swift,
-				Services/FacebookLoginProvider.swift,
+				Services/FacebookLoginProviderProtocol.swift,
 				Services/GoogleLoginProvider.swift,
 				Services/SocialLoginProvider.swift,
 				ViewModels/SocialLoginViewModel.swift,

@@ -8,7 +8,7 @@
 import Foundation
 
 enum SocialProvider: String, CaseIterable, Codable {
-    case facebook, google, apple
+    case facebook, google, apple, custom
 }
 
 struct SocialUserProfile: Equatable {

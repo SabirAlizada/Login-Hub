@@ -4,6 +4,9 @@
 //
 //  Created by Sabir Alizada on 02.05.25.
 //
+//
+//  Purpose: Handles lifecycle events and routes social login callbacks (Facebook, Google).
+//
 
 import SwiftUI
 import FacebookLogin
@@ -14,6 +17,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        // Initialize Facebook SDK
         ApplicationDelegate.shared.application(
             application,
             didFinishLaunchingWithOptions: launchOptions
@@ -22,23 +26,28 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
           
     func application(
-            _ app: UIApplication,
-            open url: URL,
-            options: [UIApplication.OpenURLOptionsKey : Any] = [:]
-        ) -> Bool {
-            // Facebook
-            if ApplicationDelegate.shared.application(
-                app,
-                open: url,
-                sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-                annotation: options[UIApplication.OpenURLOptionsKey.annotation]
-            ) {
-                return true
-            }
-            // Google
-            if GIDSignIn.sharedInstance.handle(url) {
-                return true
-            }
-            return false
+        _ app: UIApplication,
+        open url: URL,
+        options: [UIApplication.OpenURLOptionsKey: Any] = [:]
+    ) -> Bool {
+        // Handle Facebook login callback
+        let facebookHandled = ApplicationDelegate.shared.application(
+            app,
+            open: url,
+            sourceApplication: options[.sourceApplication] as? String,
+            annotation: options[.annotation]
+        )
+        if facebookHandled {
+            return true
         }
+        
+        // Handle Google Sign-In callback
+        let googleHandled = GIDSignIn.sharedInstance.handle(url)
+        if googleHandled {
+            return true
+        }
+        
+        // URL not handled by any social login provider
+        return false
     }
+}

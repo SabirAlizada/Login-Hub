@@ -4,12 +4,17 @@
 //
 //  Created by Sabir Alizada on 24.03.25.
 //
+/*
+ Purpose: Composes the login UI with email/password inputs, remember-me toggle,
+ login button, and social login options, handling focus and navigation.
+*/
 
 import SwiftUI
 import GoogleSignIn
 import FirebaseAuth
 
 struct LoginContentView: View {
+    // MARK: - ViewModel & State Properties
     @StateObject var viewModel: SocialLoginViewModel
     @State private var email = ""
     @State private var password = ""
@@ -20,6 +25,7 @@ struct LoginContentView: View {
     
     @FocusState private var focusField: Field?
     
+    // MARK: - Navigation & Focus Enums
     private enum Field {
         case email, password
     }
@@ -28,83 +34,106 @@ struct LoginContentView: View {
         case dashboard
     }
     
+    // MARK: - Computed Properties
+    /// Whether the form is valid to enable the Log In button
     private var canSubmit: Bool {
         InputValidator.isValidEmail(email) && !password.isEmpty
+    }
+    
+    // MARK: - Input Fields
+    private var loginFields: some View {
+        Group {
+            InputField(
+                text: $email,
+                placeholder: "Email",
+                keyboardType: .emailAddress,
+                textContentType: .emailAddress,
+                autocapitalization: .none,
+                submitLabel: .next
+            )
+            .focused($focusField, equals: .email)
+            
+            PasswordTextField(
+                password: $password,
+                showPassword: $showPassword,
+                placeholder: "Password",
+                returnKeyType: .done,
+                onReturn: { focusField = nil }
+            )
+            .focused($focusField, equals: .password)
+            .onChange(of: showPassword) { _, _ in
+                focusField = .password
+            }
+        }
+    }
+    
+    // MARK: - Helpers Section
+    private var forgotPasswordSection: some View {
+        HStack {
+            Toggle("Remember me", isOn: $rememberMe)
+                .toggleStyle(CheckboxToggleStyle())
+                .foregroundStyle(.gray)
+            Spacer()
+            Button {
+                // TODO: Implement forgot password action
+            } label: {
+                Text("Forgot password?")
+                    .foregroundStyle(.blue)
+                    .font(.subheadline)
+            }
+        }
+    }
+    
+    // MARK: - Action Section
+    private var loginButtonSection: some View {
+        Button {
+            viewModel.login(with: .custom)
+        } label: {
+            Text("Log In")
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding()
+                .frame(maxWidth: .infinity, maxHeight: 48)
+                .background(canSubmit ? Color.blue : Color.gray)
+                .cornerRadius(10)
+        }
+        .disabled(!canSubmit)
+        .opacity(canSubmit ? 1 : 0.5)
+        .shadow(radius: 2)
+        .padding(.horizontal)
+    }
+    
+    // MARK: - Social Login Section
+    private var socialLoginSection: some View {
+        VStack {
+            DividerWithLabel(label: "or log in with")
+            HStack(spacing: 20) {
+                SocialButtonView(iconName: "facebookLogo") {
+                    viewModel.login(with: .facebook)
+                }
+                SocialButtonView(iconName: "googleLogo") {
+                    viewModel.login(with: .google)
+                }
+                SocialButtonView(iconName: "appleLogo") {
+                    viewModel.login(with: .apple)
+                }
+            }
+            .padding(.vertical, 8)
+            .padding(.bottom, 35)
+        }
     }
     
     var body: some View {
         NavigationStack(path: $path) {
             VStack(spacing: 30) {
-                InputField(
-                    text: $email,
-                    placeholder: "Email",
-                    keyboardType: .emailAddress,
-                    textContentType: .emailAddress,
-                    autocapitalization: .none,
-                    submitLabel: .next)
-                .focused($focusField, equals: .email)
-                
-                PasswordTextField(
-                    password: $password,
-                    showPassword: $showPassword,
-                    placeholder: "Password",
-                    returnKeyType: .done,
-                    onReturn: { focusField = nil }
-                )
-                .focused($focusField, equals: .password)
-                .onChange(of: showPassword) { oldValue, newValue in
-                    focusField = .password
-                }
-                
-                HStack {
-                    Toggle("Remember me", isOn: $rememberMe)
-                        .toggleStyle(CheckboxToggleStyle())
-                        .foregroundStyle(.gray)
-                    
-                    Spacer()
-                    
-                    Button {
-                        // TODO: Implement button logic
-                    } label: {
-                        Text("Forgot password?")
-                            .foregroundStyle(.blue)
-                            .font(.subheadline)
-                    }
-                }
-                
-                Button {
-                } label: {
-                    Text("Log In")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity, maxHeight: 48)
-                        .background(canSubmit ? Color.blue : Color.gray)
-                        .cornerRadius(10)
-                }
-                .disabled(!canSubmit)
-                .opacity(canSubmit ? 1 : 0.5)
-                .frame(maxWidth: .infinity, maxHeight: 48)
-                .shadow(radius: 2)
-                .padding()
-                
-                DividerWithLabel(label: "or log in with")
-                
-                HStack(spacing: 20) {
-                    SocialButtonView(iconName: "facebookLogo") {
-                        viewModel.login(with: .facebook)
-                    }
-                    SocialButtonView(iconName: "googleLogo") {
-                        viewModel.login(with: .google)
-                    }
-                    SocialButtonView(iconName: "appleLogo") {
-                        viewModel.login(with: .apple)
-                    }
-                }
-                .padding(.vertical, 8)
-                .padding(.bottom, 35)
+                loginFields
+                forgotPasswordSection
+                loginButtonSection
+                socialLoginSection
+                Spacer()
             }
             .padding(.horizontal, 16)
+            // Handle return key to move focus or dismiss keyboard
             .onSubmit {
                 switch focusField {
                     case .email:
@@ -115,6 +144,7 @@ struct LoginContentView: View {
                         break
                 }
             }
+            // Navigate to dashboard when login succeeds
             .onChange(of: viewModel.userProfile) { _, profile in
                 if profile != nil {
                     path.append(LoginNavigation.dashboard)
@@ -197,4 +227,3 @@ struct CheckboxToggleStyle: ToggleStyle {
         .buttonStyle(PlainButtonStyle())
     }
 }
-

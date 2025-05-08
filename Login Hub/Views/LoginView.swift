@@ -18,7 +18,9 @@ struct LoginView: View {
                     LoginHeaderView()
                     Spacer()
                 }
-                BottomSheet(content: AuthCardView(viewModel: viewModel))
+                BottomSheet {
+                    AuthCardView(viewModel: viewModel)
+                }
             }
         }
     }

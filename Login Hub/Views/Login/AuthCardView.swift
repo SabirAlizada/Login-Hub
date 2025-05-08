@@ -66,14 +66,14 @@ struct RoundedCornerRectangle: Shape {
 }
 
 struct BottomSheet<Content: View>: View {
-    let content: Content
+    @ViewBuilder let content: () -> Content
     @State private var keyboardHeight: CGFloat = 0
     
     var body: some View {
         GeometryReader { geometry in
             VStack {
                 Spacer()
-                content
+                content()
                     .padding(.bottom, keyboardHeight)
                     .animation(.easeOut(duration: 0.3), value: keyboardHeight)
             }

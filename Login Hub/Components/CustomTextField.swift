@@ -18,7 +18,7 @@ struct PasswordFieldRepresentable: UIViewRepresentable {
     var onReturn: (() -> Void)?
     
     // MARK: - UIViewRepresentable
-    // Create and configure the UITextField instance
+    // Creates and configures the UITextField instance
     func makeUIView(context: Context) -> UITextField {
         let field = UITextField()
         field.delegate = context.coordinator
@@ -38,16 +38,16 @@ struct PasswordFieldRepresentable: UIViewRepresentable {
         return field
     }
     
-    // Update text and secure entry state when bindings change
+    // Updates text and secure entry state when bindings change
     func updateUIView(_ uiView: UITextField, context: Context) {
         // Only update text if it's different to avoid cursor reset
         if uiView.text != text {
             uiView.text = text
         }
         
-        // Handle secure text entry change
+        // Handles secure text entry change
         if uiView.isSecureTextEntry != isSecure {
-            // Create a temporary field to avoid cursor jumping
+            // Creates a temporary field to avoid cursor jumping
             let tempField = UITextField()
             tempField.isSecureTextEntry = isSecure
             tempField.text = text
