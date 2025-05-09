@@ -172,7 +172,7 @@ final class SocialLoginViewModel: ObservableObject {
     }
 
     // MARK: - Remember Me Functionality
-    /// Saves credentials to Keychain if remember me is enabled
+    // Saves credentials to Keychain if remember me is enabled
     private func saveCredentialsToKeychain(email: String, password: String) {
         let credentials = "\(email):\(password)".data(using: .utf8)!
         
@@ -183,17 +183,15 @@ final class SocialLoginViewModel: ObservableObject {
             kSecValueData as String: credentials
         ]
         
-        // First try to delete any existing credentials
         SecItemDelete(query as CFDictionary)
         
-        // Then add the new credentials
         let status = SecItemAdd(query as CFDictionary, nil)
         if status != errSecSuccess {
             print("Error saving credentials to Keychain: \(status)")
         }
     }
     
-    /// Removes credentials from Keychain
+    // Removes credentials from Keychain
     private func removeCredentialsFromKeychain() {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -204,7 +202,7 @@ final class SocialLoginViewModel: ObservableObject {
         SecItemDelete(query as CFDictionary)
     }
     
-    /// Retrieves saved credentials from Keychain
+    // Retrieves saved credentials from Keychain
     func loadSavedCredentials() {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -227,7 +225,7 @@ final class SocialLoginViewModel: ObservableObject {
     }
 
     // MARK: - Logout
-    /// Logs out the user from all providers and clears user state.
+    // Logs out the user from all providers and clears user state.
     func logout() {
         // First, sign out from Firebase
         do {
@@ -254,7 +252,6 @@ final class SocialLoginViewModel: ObservableObject {
             self?.userProfile = nil
             self?.isLoggedIn = false
             self?.errorMessage = nil
-            // Don't clear saved credentials on logout if remember me is enabled
         }
     }
 }
