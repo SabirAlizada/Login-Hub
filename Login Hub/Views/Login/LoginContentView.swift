@@ -74,6 +74,13 @@ struct LoginContentView: View {
             Toggle("Remember me", isOn: $rememberMe)
                 .toggleStyle(CheckboxToggleStyle())
                 .foregroundStyle(.gray)
+                .onChange(of: rememberMe) { _, isEnabled in
+                    if isEnabled {
+                        viewModel.savedCredentials = (email, password)
+                    } else {
+                        viewModel.savedCredentials = nil
+                    }
+                }
             Spacer()
             Button {
                 // TODO: Implement forgot password action
@@ -88,6 +95,9 @@ struct LoginContentView: View {
     // MARK: - Action Section
     private var loginButtonSection: some View {
         Button {
+            if rememberMe {
+                viewModel.savedCredentials = (email, password)
+            }
             viewModel.signIn(email: email, password: password)
         } label: {
             Text("Log In")
@@ -157,6 +167,15 @@ struct LoginContentView: View {
                         if let profile = viewModel.userProfile {
                             DashboardView(userProfile: profile)
                         }
+                }
+            }
+            .onAppear {
+                // Load saved credentials when view appears
+                viewModel.loadSavedCredentials()
+                if let savedCredentials = viewModel.savedCredentials {
+                    email = savedCredentials.email
+                    password = savedCredentials.password
+                    rememberMe = true
                 }
             }
         }
