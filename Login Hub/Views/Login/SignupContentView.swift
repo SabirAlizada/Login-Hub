@@ -20,6 +20,8 @@ struct SignupContentView: View {
     @State private var phoneNumber: String = ""
     @State private var birthDate: Date = Date()
     @State private var studentID: String = ""
+    @State private var showAlert = false
+    @State private var alertMessage = ""
     let viewModel: SocialLoginViewModel
     
     // MARK: - Focus Enums
@@ -109,7 +111,14 @@ struct SignupContentView: View {
     // MARK: - Action Section
     private var signUpButtonSection: some View {
         Button {
-            // TODO: Implement sign-up action
+            viewModel.signUp(
+                email: email,
+                password: password,
+                firstName: firstName,
+                lastName: lastName,
+                phoneNumber: phoneNumber,
+                birthDate: birthDate
+            )
         } label: {
             Text("Sign up")
                 .font(.headline)
@@ -122,6 +131,18 @@ struct SignupContentView: View {
         .opacity(canSubmit ? 1 : 0.5)
         .shadow(radius: 2)
         .padding(.bottom, 20)
+        .onChange(of: viewModel.userProfile) { _, profile in
+            if profile != nil {
+                alertMessage = "Registration successful! Please log in with your credentials."
+                showAlert = true
+            }
+        }
+        .onChange(of: viewModel.errorMessage) { _, error in
+            if let error = error {
+                alertMessage = error
+                showAlert = true
+            }
+        }
     }
     
     var body: some View {
@@ -152,6 +173,13 @@ struct SignupContentView: View {
                 case .none:
                     break
             }
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("Sign Up"),
+                message: Text(alertMessage),
+                dismissButton: .default(Text("OK"))
+            )
         }
     }
 }

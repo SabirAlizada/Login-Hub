@@ -41,6 +41,7 @@ struct LoginHubApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(viewModel: viewModel)
+                .environmentObject(viewModel)
         }
     }
 }

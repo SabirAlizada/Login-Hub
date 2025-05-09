@@ -12,10 +12,11 @@
 import SwiftUI
 import GoogleSignIn
 import FirebaseAuth
+import _AuthenticationServices_SwiftUI
 
 struct LoginContentView: View {
     // MARK: - ViewModel & State Properties
-    @StateObject var viewModel: SocialLoginViewModel
+    @ObservedObject var viewModel: SocialLoginViewModel
     @State private var email = ""
     @State private var password = ""
     @State private var rememberMe = false
@@ -87,7 +88,7 @@ struct LoginContentView: View {
     // MARK: - Action Section
     private var loginButtonSection: some View {
         Button {
-            viewModel.login(with: .custom)
+            viewModel.signIn(email: email, password: password)
         } label: {
             Text("Log In")
                 .font(.headline)
@@ -146,7 +147,7 @@ struct LoginContentView: View {
             }
             // Navigate to dashboard when login succeeds
             .onChange(of: viewModel.userProfile) { _, profile in
-                if profile != nil {
+                if profile != nil && path.isEmpty {
                     path.append(LoginNavigation.dashboard)
                 }
             }

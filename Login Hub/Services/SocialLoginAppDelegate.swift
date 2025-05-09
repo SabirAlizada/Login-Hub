@@ -17,7 +17,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        // Initialize Facebook SDK
+        // Initializes Facebook SDK
         ApplicationDelegate.shared.application(
             application,
             didFinishLaunchingWithOptions: launchOptions
@@ -30,7 +30,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         open url: URL,
         options: [UIApplication.OpenURLOptionsKey: Any] = [:]
     ) -> Bool {
-        // Handle Facebook login callback
+        // Handles Facebook login callback
         let facebookHandled = ApplicationDelegate.shared.application(
             app,
             open: url,
@@ -41,7 +41,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             return true
         }
         
-        // Handle Google Sign-In callback
+        // Handles Google Sign-In callback
         let googleHandled = GIDSignIn.sharedInstance.handle(url)
         if googleHandled {
             return true

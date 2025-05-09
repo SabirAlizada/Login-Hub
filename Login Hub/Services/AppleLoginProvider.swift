@@ -3,6 +3,7 @@ import AuthenticationServices
 import Combine
 import UIKit
 import Security
+import FirebaseAuth
 
 /*
  Purpose: Provides Sign in with Apple functionality conforming to SocialLoginProviderProtocol,
@@ -10,18 +11,37 @@ import Security
  */
 
 final class AppleLoginProvider: NSObject, SocialLoginProviderProtocol {
+    // MARK: - Properties
+    private var currentNonce: String?
+    
+    // Creates an OAuth credential for Firebase from Apple ID credential.
+    private func makeFirebaseCredential(from appleCredential: ASAuthorizationAppleIDCredential) -> AuthCredential? {
+        guard let identityToken = appleCredential.identityToken,
+              let tokenString = String(data: identityToken, encoding: .utf8),
+              let nonce = currentNonce else {
+            return nil
+        }
+        return OAuthProvider.credential(
+            providerID: AuthProviderID.apple,
+            idToken: tokenString,
+            rawNonce: nonce
+        )
+    }
+    
     // Publishes a SocialUserProfile on successful Apple Sign-In or an Error on failure
     let loginPublisher = PassthroughSubject<SocialUserProfile, Error>()
     private var currentAuthorizationController: ASAuthorizationController?
     
+    // MARK: - Initialization
     override init() {
         super.init()
-        // Check for existing credentials on initialization
+        // Checks for existing credentials on initialization
         checkExistingCredentials()
     }
     
+    // MARK: - Private Methods
     private func checkExistingCredentials() {
-        // Verify existing Apple ID credential state on initialization
+        // Verifies existing Apple ID credential state on initialization
         let provider = ASAuthorizationAppleIDProvider()
         provider.getCredentialState(
             forUserID: UserDefaults.standard.string(forKey: "appleUserID") ?? "") { [weak self] state, error in
@@ -55,11 +75,16 @@ final class AppleLoginProvider: NSObject, SocialLoginProviderProtocol {
             }
     }
     
+    // MARK: - Public API
     func login() {
-        // Create Apple ID authorization request with desired scopes
+        // Creates Apple ID authorization request with desired scopes
         let provider = ASAuthorizationAppleIDProvider()
         let request = provider.createRequest()
         request.requestedScopes = [.fullName, .email]
+        
+        let nonce = AppleSignInNonce.randomNonceString()
+        currentNonce = nonce
+        request.nonce = AppleSignInNonce.sha256(nonce)
         
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
@@ -79,7 +104,7 @@ final class AppleLoginProvider: NSObject, SocialLoginProviderProtocol {
     }
 }
 
-// MARK: - ASAuthorizationControllerDelegate
+// MARK: - Apple sign in authorization controller delegate
 extension AppleLoginProvider: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         // Received Apple ID credential; extract user info
@@ -88,7 +113,7 @@ extension AppleLoginProvider: ASAuthorizationControllerDelegate {
             let email = appleIDCredential.email ?? ""
             let fullName = appleIDCredential.fullName
             
-            // Build display name from name components, fallback to email if empty
+            // Builds display name from name components, fallsback to email if empty
             var name = ""
             if let givenName = fullName?.givenName {
                 name += givenName
@@ -100,7 +125,6 @@ extension AppleLoginProvider: ASAuthorizationControllerDelegate {
                 name += familyName
             }
             
-            // If name is empty, uses email as fallback
             if name.isEmpty {
                 name = email
             }
@@ -118,6 +142,16 @@ extension AppleLoginProvider: ASAuthorizationControllerDelegate {
                 provider: .apple
             )
             
+            if let credential = makeFirebaseCredential(from: appleIDCredential) {
+                Auth.auth().signIn(with: credential) { authResult, error in
+                    if let error = error {
+                        print("Firebase Apple sign-in error: \(error.localizedDescription)")
+                    } else {
+                        print("Firebase Apple sign-in success: \(authResult?.user.uid ?? "")")
+                    }
+                }
+            }
+            
             // Sends successful login profile via publisher
             DispatchQueue.main.async { [weak self] in
                 self?.loginPublisher.send(profile)
@@ -133,7 +167,7 @@ extension AppleLoginProvider: ASAuthorizationControllerDelegate {
     
     // Handles and map Apple Sign-In errors to user-friendly NSError
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        // Handle specific Apple Sign In errors
+        // Handles specific Apple Sign In errors
         let nsError = error as NSError
         var finalError = error
         
@@ -157,20 +191,29 @@ extension AppleLoginProvider: ASAuthorizationControllerDelegate {
     }
 }
 
-// MARK: - ASAuthorizationControllerPresentationContextProviding
+// MARK: - Apple sign in authorization controller presentation context providing
 extension AppleLoginProvider: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return getRootViewController().view.window ?? ASPresentationAnchor()
+    }
+}
+
+// MARK: - Presentation Context
+private extension AppleLoginProvider {
+    func getRootViewController() -> UIViewController {
         // Determines the active UIWindowScene to provide presentation anchor
         guard let windowScene = UIApplication.shared.connectedScenes
             .compactMap({ $0 as? UIWindowScene })
             .first(where: { $0.activationState == .foregroundActive }),
-              let window = windowScene.windows.first(where: { $0.isKeyWindow }) else {
+              let window = windowScene.windows.first(where: { $0.isKeyWindow }),
+              let rootVC = window.rootViewController else {
             // Fallback: creates a temporary window if no key window is available
             let window = UIWindow(frame: UIScreen.main.bounds)
-            window.rootViewController = UIViewController()
+            let viewController = UIViewController()
+            window.rootViewController = viewController
             window.makeKeyAndVisible()
-            return window
+            return viewController
         }
-        return window
+        return rootVC
     }
 }

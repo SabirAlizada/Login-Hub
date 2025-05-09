@@ -9,6 +9,8 @@ import Foundation
 import FBSDKLoginKit
 import Combine
 import UIKit
+import FirebaseAuth
+import FacebookLogin
 
 final class FacebookLoginProvider: NSObject, SocialLoginProviderProtocol {
     // Publishes a SocialUserProfile on successful login or an Error on failure
@@ -16,25 +18,28 @@ final class FacebookLoginProvider: NSObject, SocialLoginProviderProtocol {
     private let loginManager = LoginManager()
     
     func login() {
-        // Obtain the current root view controller for presenting login UI
+        // Obtains the current root view controller for presenting login UI
         guard let rootViewController = FacebookLoginProvider.getRootViewController() else {
             loginPublisher.send(completion: .failure(NSError(domain: "NoRootVC", code: 0)))
             return
         }
-        // Initiate Facebook login flow with required permissions
+        // Initiates Facebook login flow with required permissions
         loginManager.logIn(
             permissions: ["public_profile", "email"], from: rootViewController) { [weak self] result, error in
-                // Handle login error
                 if let error {
                     self?.loginPublisher.send(completion: .failure(error))
                     return
                 }
-                // Handle user cancellation
                 guard let result, !result.isCancelled else {
                     self?.loginPublisher.send(completion: .failure(NSError(domain: "Cancelled", code: 0)))
                     return
                 }
-                // Proceed to fetch user profile
+                guard let accessToken = AccessToken.current else {
+                    self?.loginPublisher.send(completion: .failure(NSError(domain: "NoAccessToken", code: 0)))
+                    return
+                }
+                // Sign in to Firebase and fetch
+                self?.handleFirebaseLogin(accessToken: accessToken)
                 self?.fetchProfile()
             }
     }
@@ -43,7 +48,7 @@ final class FacebookLoginProvider: NSObject, SocialLoginProviderProtocol {
         loginManager.logOut()
     }
     
-    // Request user profile from Facebook Graph API
+    // Requests user profile from Facebook Graph API
     private func fetchProfile() {
         GraphRequest(
             graphPath: "me",
@@ -51,12 +56,12 @@ final class FacebookLoginProvider: NSObject, SocialLoginProviderProtocol {
                 [weak self] _,
                 result,
                 error in
-                // Handle graph request error
+                // Handles graph request error
                 if let error {
                     self?.loginPublisher.send(completion: .failure(error))
                     return
                 }
-                // Parse Graph API response to build SocialUserProfile
+                // Parses Graph API response to build SocialUserProfile
                 if let dict = result as? [String: Any],
                    let id = dict["id"] as? String,
                    let name = dict["name"] as? String,
@@ -79,14 +84,25 @@ final class FacebookLoginProvider: NSObject, SocialLoginProviderProtocol {
     
     // Retrieves the current key window's root view controller
     private static func getRootViewController() -> UIViewController? {
-        // Filter connected scenes for the active window scene
+        // Filters connected scenes for the active window scene
         let activeScene = UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
             .first { $0.activationState == .foregroundActive }
-        // Return the root view controller of the key window
+        // Returns the root view controller of the key window
         return activeScene?
             .windows
             .first { $0.isKeyWindow }?
             .rootViewController
+    }
+    
+    private func handleFirebaseLogin(accessToken: FBSDKLoginKit.AccessToken) {
+        let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+        Auth.auth().signIn(with: credential) { authResult, error in
+            if let error = error {
+                print("Firebase Facebook sign-in error: \(error.localizedDescription)")
+                return
+            }
+            print("Firebase Facebook sign-in success: \(authResult?.user.uid ?? "")")
+        }
     }
 }

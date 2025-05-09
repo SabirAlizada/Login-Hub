@@ -42,6 +42,11 @@ struct DashboardView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .onChange(of: viewModel.isLoggedIn) { _, isLoggedIn in
+            if !isLoggedIn {
+                presentationMode.wrappedValue.dismiss()
+            }
+        }
     }
     
     // MARK: - Quick Actions Section
@@ -158,16 +163,19 @@ struct DashboardView: View {
     
     // MARK: - Logout Button
     private var logoutButton: some View {
-        Button(action: {
+        Button {
             viewModel.logout()
-            presentationMode.wrappedValue.dismiss()
-        }) {
-            Text("Log Out")
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.red.opacity(0.8))
-                .cornerRadius(10)
+        } label: {
+            HStack {
+                Image(systemName: "rectangle.portrait.and.arrow.right")
+                    .foregroundColor(.red)
+                Text("Log Out")
+                    .foregroundColor(.red)
+            }
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(Color.white.opacity(0.1))
+            .cornerRadius(cardCornerRadius)
         }
     }
 }
