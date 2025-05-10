@@ -1,0 +1,100 @@
+{
+  "" : {
+    "const-values" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/Login Hub-master.swiftconstvalues",
+    "dependencies" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/Login Hub-master.d",
+    "diagnostics" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/Login Hub-master.dia",
+    "emit-module-dependencies" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/Login Hub-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/Login Hub-master-emit-module.dia",
+    "swift-dependencies" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/Login Hub-master.swiftdeps"
+  },
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/App/ContentView.swift" : {
+    "index-unit-output-path" : "/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/ContentView.o"
+  },
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/App/Login_HubApp.swift" : {
+    "index-unit-output-path" : "/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/Login_HubApp.o",
+    "llvm-bc" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/Login_HubApp.bc",
+    "object" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/Login_HubApp.o"
+  },
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Components/CustomTextField.swift" : {
+    "index-unit-output-path" : "/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/CustomTextField.o",
+    "llvm-bc" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/CustomTextField.bc",
+    "object" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/CustomTextField.o"
+  },
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Models/SocialUserProfile.swift" : {
+    "index-unit-output-path" : "/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/SocialUserProfile.o",
+    "llvm-bc" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/SocialUserProfile.bc",
+    "object" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/SocialUserProfile.o"
+  },
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Services/FacebookLoginAppDelegate.swift" : {
+    "index-unit-output-path" : "/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/FacebookLoginAppDelegate.o",
+    "llvm-bc" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/FacebookLoginAppDelegate.bc",
+    "object" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/FacebookLoginAppDelegate.o"
+  },
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Services/FacebookLoginProvider.swift" : {
+    "index-unit-output-path" : "/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/FacebookLoginProvider.o",
+    "llvm-bc" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/FacebookLoginProvider.bc",
+    "object" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/FacebookLoginProvider.o"
+  },
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Services/SocialLoginProvider.swift" : {
+    "index-unit-output-path" : "/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/SocialLoginProvider.o",
+    "llvm-bc" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/SocialLoginProvider.bc",
+    "object" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/SocialLoginProvider.o"
+  },
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Utilities/InputValidator.swift" : {
+    "index-unit-output-path" : "/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/InputValidator.o",
+    "llvm-bc" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/InputValidator.bc",
+    "object" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/InputValidator.o"
+  },
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Utilities/KeyboardAdaptive.swift" : {
+    "index-unit-output-path" : "/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/KeyboardAdaptive.o",
+    "llvm-bc" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/KeyboardAdaptive.bc",
+    "object" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/KeyboardAdaptive.o"
+  },
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/ViewModels/SocialLoginViewModel.swift" : {
+    "index-unit-output-path" : "/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/SocialLoginViewModel.o",
+    "llvm-bc" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/SocialLoginViewModel.bc",
+    "object" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/SocialLoginViewModel.o"
+  },
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Views/BackgroundView.swift" : {
+    "index-unit-output-path" : "/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/BackgroundView.o",
+    "llvm-bc" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/BackgroundView.bc",
+    "object" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/BackgroundView.o"
+  },
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Views/Dashboard/DashboardView.swift" : {
+    "index-unit-output-path" : "/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/DashboardView.o",
+    "llvm-bc" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/DashboardView.bc",
+    "object" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/DashboardView.o"
+  },
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Views/Login/AuthCardView.swift" : {
+    "index-unit-output-path" : "/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/AuthCardView.o",
+    "llvm-bc" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/AuthCardView.bc",
+    "object" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/AuthCardView.o"
+  },
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Views/Login/LoginContentView.swift" : {
+    "index-unit-output-path" : "/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/LoginContentView.o",
+    "llvm-bc" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/LoginContentView.bc",
+    "object" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/LoginContentView.o"
+  },
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Views/Login/LoginHeaderView.swift" : {
+    "index-unit-output-path" : "/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/LoginHeaderView.o",
+    "llvm-bc" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/LoginHeaderView.bc",
+    "object" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/LoginHeaderView.o"
+  },
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Views/Login/SignupContentView.swift" : {
+    "index-unit-output-path" : "/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/SignupContentView.o",
+    "llvm-bc" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/SignupContentView.bc",
+    "object" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/SignupContentView.o"
+  },
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/Login Hub/Views/LoginView.swift" : {
+    "index-unit-output-path" : "/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/LoginView.o",
+    "llvm-bc" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/LoginView.bc",
+    "object" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/LoginView.o"
+  },
+  "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "index-unit-output-path" : "/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/sabir/Developer/Projects/Feats/Login Hub/build/Login Hub.build/Release-iphoneos/Login Hub.build/Objects-normal/arm64/GeneratedAssetSymbols.o"
+  }
+}

@@ -1,0 +1,22 @@
+Target dependency graph (8 targets)
+Target 'Login Hub' in project 'Login Hub'
+➜ Explicit dependency on target 'FacebookAEM' in project 'Facebook'
+➜ Explicit dependency on target 'FacebookBasics' in project 'Facebook'
+➜ Explicit dependency on target 'FacebookCore' in project 'Facebook'
+➜ Explicit dependency on target 'FacebookLogin' in project 'Facebook'
+Target 'FacebookLogin' in project 'Facebook'
+➜ Explicit dependency on target 'FacebookLogin' in project 'Facebook'
+➜ Explicit dependency on target 'FacebookAEM' in project 'Facebook'
+➜ Explicit dependency on target 'FacebookCore' in project 'Facebook'
+Target 'FacebookLogin' in project 'Facebook'
+➜ Explicit dependency on target 'FacebookAEM' in project 'Facebook'
+➜ Explicit dependency on target 'FacebookCore' in project 'Facebook'
+Target 'FacebookCore' in project 'Facebook'
+➜ Explicit dependency on target 'FacebookCore' in project 'Facebook'
+➜ Explicit dependency on target 'FacebookAEM' in project 'Facebook'
+Target 'FacebookCore' in project 'Facebook'
+➜ Explicit dependency on target 'FacebookAEM' in project 'Facebook'
+Target 'FacebookBasics' in project 'Facebook' (no dependencies)
+Target 'FacebookAEM' in project 'Facebook'
+➜ Explicit dependency on target 'FacebookAEM' in project 'Facebook'
+Target 'FacebookAEM' in project 'Facebook' (no dependencies)
