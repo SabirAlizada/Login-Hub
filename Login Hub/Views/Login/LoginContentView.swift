@@ -36,7 +36,7 @@ struct LoginContentView: View {
     }
     
     // MARK: - Computed Properties
-    /// Whether the form is valid to enable the Log In button
+    // Whether the form is valid to enable the Log In button
     private var canSubmit: Bool {
         InputValidator.isValidEmail(email) && !password.isEmpty
     }
@@ -148,7 +148,7 @@ struct LoginContentView: View {
                 Spacer()
             }
             .padding(.horizontal, 16)
-            // Handle return key to move focus or dismiss keyboard
+            // Handles return key to move focus or dismiss keyboard
             .onSubmit {
                 switch focusField {
                     case .email:
@@ -159,7 +159,7 @@ struct LoginContentView: View {
                         break
                 }
             }
-            // Navigate to dashboard when login succeeds
+            // Navigates to dashboard when login succeeds
             .onChange(of: viewModel.userProfile) { _, profile in
                 if profile != nil && path.isEmpty {
                     path.append(LoginNavigation.dashboard)
@@ -174,7 +174,7 @@ struct LoginContentView: View {
                 }
             }
             .onAppear {
-                // Load saved credentials when view appears
+                // Loads saved credentials when view appears
                 viewModel.loadSavedCredentials()
                 if let savedCredentials = viewModel.savedCredentials {
                     email = savedCredentials.email

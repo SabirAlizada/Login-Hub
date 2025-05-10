@@ -6,7 +6,7 @@
 //
 /*
  Purpose: Manages user input for sign-up, handling focus, validation, and form submission.
-*/
+ */
 
 import SwiftUI
 
@@ -22,6 +22,7 @@ struct SignupContentView: View {
     @State private var studentID: String = ""
     @State private var showAlert = false
     @State private var alertMessage = ""
+    @State private var isEmailEmpty = true
     let viewModel: SocialLoginViewModel
     
     // MARK: - Focus Enums
@@ -62,7 +63,8 @@ struct SignupContentView: View {
             text: $email,
             placeholder: "Email",
             keyboardType: .emailAddress,
-            autocapitalization: .none
+            textContentType: .none,
+            autocapitalization: .none,
         )
         .focused($focusedField, equals: .email)
     }
@@ -76,6 +78,7 @@ struct SignupContentView: View {
             onReturn: { focusedField = .phone }
         )
         .focused($focusedField, equals: .password)
+        .textContentType(.password)
     }
     
     // MARK: - Phone Field
