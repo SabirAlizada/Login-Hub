@@ -53,6 +53,8 @@ struct LoginContentView: View {
                 submitLabel: .next
             )
             .focused($focusField, equals: .email)
+            .background(Color(uiColor: .systemBackground))
+            .foregroundStyle(Color(uiColor: .label))
             
             PasswordTextField(
                 password: $password,
@@ -62,6 +64,8 @@ struct LoginContentView: View {
                 onReturn: { focusField = nil }
             )
             .focused($focusField, equals: .password)
+            .background(Color(uiColor: .systemBackground))
+            .foregroundStyle(Color(uiColor: .label))
             .onChange(of: showPassword) { _, _ in
                 focusField = .password
             }

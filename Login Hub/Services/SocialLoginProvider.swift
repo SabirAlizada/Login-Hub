@@ -1,5 +1,5 @@
 //
-//  SocialLoginProvider.swift
+//  SocialLoginProviderProtocol.swift
 //  Login Hub
 //
 //  Created by Sabir Alizada on 02.05.25.

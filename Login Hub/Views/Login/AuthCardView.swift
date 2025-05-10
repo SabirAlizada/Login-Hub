@@ -30,6 +30,9 @@ struct AuthCardView: View {
             .scaleEffect(x: 1, y: 1, anchor: .center)
             .padding(.horizontal, 16)
             .padding(.top, 16)
+            .background(Color(uiColor: .systemBackground))
+            .foregroundStyle(Color(uiColor: .label))
+            .tint(.blue)
             
             // Switch content based on selected tab
             Group {
@@ -46,7 +49,8 @@ struct AuthCardView: View {
         .frame(maxWidth: .infinity)
         .background(
             RoundedCornerRectangle(radius: 25, corners: [.topLeft, .topRight])
-                .fill(Color.white)
+                .fill(Color(uiColor: .systemBackground))
+                .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: -5)
         )
         .compositingGroup()
     }
