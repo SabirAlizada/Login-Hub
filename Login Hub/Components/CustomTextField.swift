@@ -138,6 +138,7 @@ struct InputField: View {
             .keyboardType(keyboardType)
             .textContentType(textContentType)
             .autocapitalization(autocapitalization)
+            .autocorrectionDisabled(true)
             .submitLabel(submitLabel)
             .onSubmit {
                 onSubmit?()

@@ -78,6 +78,8 @@ struct BottomSheet<Content: View>: View {
             VStack {
                 Spacer()
                 content()
+                    .background(Color(uiColor: .systemBackground))
+                    .clipShape(RoundedCornerRectangle(radius: 25, corners: [.topLeft, .topRight]))
                     .padding(.bottom, keyboardHeight)
                     .animation(.easeOut(duration: 0.3), value: keyboardHeight)
             }
